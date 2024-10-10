@@ -1,13 +1,15 @@
 FROM node:22-alpine
 
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
+WORKDIR /app
 
 EXPOSE 3000
 
-CMD ["node", "app.js"]
+COPY package.json yarn.lock ./
+
+RUN npm install -g yarn && yarn install --frozen-lockfile
+
+COPY . .
+
+RUN yarn build
+
+CMD ["yarn", "start"]
