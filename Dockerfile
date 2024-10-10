@@ -4,9 +4,11 @@ WORKDIR /app
 
 EXPOSE 3000
 
-COPY package.json ./
+RUN apk add --no-cache yarn
 
-RUN npm install -g yarn && yarn install --frozen-lockfile
+COPY package.json yarn.lock ./
+
+RUN yarn install --frozen-lockfile && yarn cache clean --force
 
 COPY . .
 
