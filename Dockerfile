@@ -6,7 +6,7 @@ EXPOSE 3000
 
 RUN apk add --no-cache yarn
 
-COPY package.json yarn.lock ./
+COPY package.json  ./
 
 RUN yarn install --frozen-lockfile && yarn cache clean --force
 
