@@ -1,14 +1,19 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Panel, PanelHeader, PanelHeaderContent, Avatar, NavIdProps, Group, ButtonGroup, Button, Div, PanelHeaderButton, CardGrid, CardScroll, ContentCard, Card, PanelHeaderBack, PanelSpinner } from '@vkontakte/vkui';
+import { FC, useEffect, useState } from 'react';
+import { Panel, PanelHeader, NavIdProps, Group, ButtonGroup, Button, ContentCard, PanelHeaderBack, PanelSpinner } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 export interface ProScreenProps extends NavIdProps {
     fetchedUser?: UserInfo;
 }
+interface ProItem {
+    id: number;
+    name: string;
+    description: string;
+}
 
-export const ProScreen: FC<ProScreenProps> = ({ id, fetchedUser }) => {
-    const [proItems, setProItems] = useState<FitItem[]>([]);
+export const ProScreen: FC<ProScreenProps> = ({ id }) => {
+    const [proItems, setProItems] = useState<ProItem[]>([]);
     const routeNavigator = useRouteNavigator();
 
     useEffect(() => {
@@ -27,14 +32,14 @@ export const ProScreen: FC<ProScreenProps> = ({ id, fetchedUser }) => {
         })
         .then(data => {
             // Фильтруем элементы с названием "be pro"
-            const proData = data.filter(item => item.name === 'be pro');
+            const proData = data.filter((item: {name: string}) => item.name === 'be pro');
             setProItems(proData);
         })
         .catch(error => console.error("Error fetching pro items", error));
     }, []);    
     
     return (
-        <Panel aria-busy={proItems.length === 0}>
+        <Panel id={id} aria-busy={proItems.length === 0}>
             <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.back()} />} style={{ paddingBottom: "2vh" }}>
                 ITMO PRO
             </PanelHeader>

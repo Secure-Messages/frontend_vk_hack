@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Panel, PanelHeader, PanelHeaderBack, Group, ButtonGroup, Button, ContentCard, PanelSpinner } from '@vkontakte/vkui';
+import { FC, useEffect, useState } from 'react';
+import { Panel, PanelHeader, PanelHeaderBack, Group, NavIdProps, ButtonGroup, Button, ContentCard, PanelSpinner } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -13,7 +13,7 @@ interface EcoItem {
     description: string;
 }
 
-export const EcoScreen: FC<EcoScreenProps> = ({ id, fetchedUser }) => {
+export const EcoScreen: FC<EcoScreenProps> = ({ id }) => {
     const [ecoItems, setEcoItems] = useState<EcoItem[]>([]);
     const routeNavigator = useRouteNavigator();
 
@@ -33,14 +33,14 @@ export const EcoScreen: FC<EcoScreenProps> = ({ id, fetchedUser }) => {
         })
         .then(data => {
             // Фильтруем элементы с названием "be eco"
-            const ecoData = data.filter(item => item.name === 'be eco');
+            const ecoData = data.filter((item: {name: string}) => item.name === 'be eco');
             setEcoItems(ecoData);
         })
         .catch(error => console.error("Error fetching eco items", error));
     }, []);    
     
     return (
-        <Panel aria-busy={ecoItems.length === 0}>
+        <Panel id={id} aria-busy={ecoItems.length === 0}>
             <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.back()} />} style={{ paddingBottom: "2vh" }}>
                 ITMO ECO
             </PanelHeader>

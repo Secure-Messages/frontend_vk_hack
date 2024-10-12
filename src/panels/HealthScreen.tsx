@@ -1,13 +1,18 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Panel, PanelHeader, PanelHeaderContent, Avatar, NavIdProps, Group, ButtonGroup, Button, Div, PanelHeaderButton, CardGrid, CardScroll, ContentCard, Card, PanelHeaderBack, PanelSpinner } from '@vkontakte/vkui';
+import { FC, useEffect, useState } from 'react';
+import { Panel, PanelHeader, NavIdProps, Group, ButtonGroup, Button, ContentCard, PanelHeaderBack, PanelSpinner } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
 export interface HealthScreenProps extends NavIdProps {
     fetchedUser?: UserInfo;
 }
+interface HealthItem {
+    id: number;
+    name: string;
+    description: string;
+}
 
-export const HealthScreen: FC<HealthScreenProps> = ({ id, fetchedUser }) => {
+export const HealthScreen: FC<HealthScreenProps> = ({ id }) => {
     const [healthItems, setHealthItems] = useState<HealthItem[]>([]);
     const routeNavigator = useRouteNavigator();
 
@@ -27,14 +32,14 @@ export const HealthScreen: FC<HealthScreenProps> = ({ id, fetchedUser }) => {
         })
         .then(data => {
             // Фильтруем элементы с названием "be health"
-            const healthData = data.filter(item => item.name === 'be healthy');
+            const healthData = data.filter((item: {name: string}) => item.name === 'be healthy');
             setHealthItems(healthData);
         })
         .catch(error => console.error("Error fetching health items", error));
     }, []);    
     
     return (
-        <Panel aria-busy={healthItems.length === 0}>
+        <Panel id={id} aria-busy={healthItems.length === 0}>
             <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.back()} />} style={{ paddingBottom: "2vh" }}>
                 ITMO HEALTHY
             </PanelHeader>

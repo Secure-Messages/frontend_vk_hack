@@ -1,14 +1,17 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Panel, PanelHeader, PanelHeaderContent, Avatar, NavIdProps, Group, ButtonGroup, Button, Div, PanelHeaderButton, CardGrid, CardScroll, ContentCard, Card, Placeholder, PanelHeaderBack, PanelSpinner } from '@vkontakte/vkui';
+import { FC, useEffect, useState } from 'react';
+import { Panel, PanelHeader, NavIdProps, Group, ButtonGroup, Button, ContentCard, PanelHeaderBack, PanelSpinner } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
-import PersikImage from '../assets/persik.png';
 
 export interface FitScreenProps extends NavIdProps {
     fetchedUser?: UserInfo;
 }
-
-export const FitScreen: FC<FitScreenProps> = ({ id, fetchedUser }) => {
+interface FitItem {
+    id: number;
+    name: string;
+    description: string;
+}
+export const FitScreen: FC<FitScreenProps> = ({ id }) => {
     const [fitItems, setFitItems] = useState<FitItem[]>([]);
     const routeNavigator = useRouteNavigator();
 
@@ -28,14 +31,14 @@ export const FitScreen: FC<FitScreenProps> = ({ id, fetchedUser }) => {
         })
         .then(data => {
             // Фильтруем элементы с названием "be fit"
-            const fitData = data.filter(item => item.name === 'be fit');
+            const fitData = data.filter((item: { name: string }) => item.name === 'be fit');
             setFitItems(fitData);
         })
         .catch(error => console.error("Error fetching fit items", error));
     }, []);    
     
     return (
-        <Panel aria-busy={fitItems.length === 0}>
+        <Panel id={id} aria-busy={fitItems.length === 0}>
             <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.back()} />} style={{ paddingBottom: "2vh" }}>
                 ITMO FIT
             </PanelHeader>
