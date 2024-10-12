@@ -5,4 +5,6 @@ export { EcoScreen } from './EcoScreen'
 export { FitScreen } from './FitScreen'
 export { ProScreen } from './ProScreen'
 export { HealthScreen } from './HealthScreen'
+export { StoryDetailScreen } from './StoryDetailScreen'
+
 export type { HomeProps } from './Home';

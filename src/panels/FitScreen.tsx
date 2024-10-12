@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Panel, PanelHeader, NavIdProps, Group, ButtonGroup, Button, ContentCard, PanelHeaderBack, PanelSpinner } from '@vkontakte/vkui';
+import { Panel, PanelHeader, NavIdProps, Group, ButtonGroup, Button, PanelHeaderBack, PanelSpinner, Card, Div, Text } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -45,16 +45,36 @@ export const FitScreen: FC<FitScreenProps> = ({ id }) => {
 
             {fitItems.length > 0 ? (
                 fitItems.map(item => (
-                    <ContentCard
-                        key={item.id}
-                        src="https://images.unsplash.com/photo-1603928726698-a015a1015d0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
-                        alt={item.name}
-                        subtitle="ITMO FIT"
-                        header={item.name}
-                        text={item.description}
-                        caption="Photo by Alexander Jawfox on Unsplash"
-                        maxHeight={500}
-                    />
+                    <Div>
+                    <Card key={item.id} mode="outline-tint" style={{ marginBottom: '16px', minWidth: '240px' }}>
+                        <Div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <img 
+                                src="https://i.postimg.cc/ZCLjMHgh/Vector-4.png" 
+                                alt={item.name} 
+                                style={{ 
+                                    width: 'auto', 
+                                    height: '170px', 
+                                    objectFit: 'cover', 
+                                    display: 'block', 
+                                    maxWidth: '100%', 
+                                    margin: '0 auto' 
+                                }}
+                            />
+                            <Text style={{ marginTop: '8px', textAlign: 'center' }}>{item.name}</Text>
+                            <Text style={{ marginTop: '4px', color: 'gray', textAlign: 'center', width: '80%' }}>{item.description}</Text>
+                        </Div>
+                    </Card>
+                    </Div>
+                    // <ContentCard
+                    //     key={item.id}
+                    //     src="https://images.unsplash.com/photo-1603928726698-a015a1015d0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+                    //     alt={item.name}
+                    //     subtitle="ITMO FIT"
+                    //     header={item.name}
+                    //     text={item.description}
+                    //     caption="Photo by Alexander Jawfox on Unsplash"
+                    //     maxHeight={500}
+                    // />
                 ))
             ) : (
                 <Group

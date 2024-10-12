@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Panel, PanelHeader, PanelHeaderBack, Group, NavIdProps, ButtonGroup, Button, ContentCard, PanelSpinner } from '@vkontakte/vkui';
+import { Panel, PanelHeader, PanelHeaderBack, Group, NavIdProps, ButtonGroup, Button, PanelSpinner, Card, Div, Text } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -47,17 +47,26 @@ export const EcoScreen: FC<EcoScreenProps> = ({ id }) => {
 
             {ecoItems.length > 0 ? (
                 ecoItems.map(item => (
-                    <ContentCard
-                        key={item.id}
-                        src="https://i.postimg.cc/w7z02ZwV/Vector-3.png"
-                        alt={item.name}
-                        subtitle="ITMO ECO"
-                        header={item.name}
-                        text={item.description}
-                        caption="Photo by Alexander Jawfox on Unsplash"
-                        size={40}
-                        height={500}
-                    />
+                    <Div>
+                    <Card key={item.id} mode="outline-tint" style={{ marginBottom: '16px', minWidth: '240px' }}>
+                        <Div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <img 
+                                src="https://i.postimg.cc/w7z02ZwV/Vector-3.png" 
+                                alt={item.name} 
+                                style={{ 
+                                    width: 'auto', 
+                                    height: '170px', 
+                                    objectFit: 'cover', 
+                                    display: 'block', 
+                                    maxWidth: '100%', 
+                                    margin: '0 auto' 
+                                }}
+                            />
+                            <Text style={{ marginTop: '8px', textAlign: 'center' }}>{item.name}</Text>
+                            <Text style={{ marginTop: '4px', color: 'gray', textAlign: 'center', width: '80%' }}>{item.description}</Text>
+                        </Div>
+                    </Card>
+                    </Div>
                 ))
             ) : (
                 <Group

@@ -13,11 +13,11 @@ import {
   CardScroll,
   Card,
   Header,
-  Text,
 } from "@vkontakte/vkui";
 import { UserInfo } from "@vkontakte/vk-bridge";
 import "./MainScreen.css";
 import { useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
+import CardStory from "../components/CardStory";
 
 export interface MainScreenProps extends NavIdProps {
   fetchedUser?: UserInfo;
@@ -25,7 +25,53 @@ export interface MainScreenProps extends NavIdProps {
 
 export const MainScreen: FC<MainScreenProps> = ({ id, fetchedUser }) => {
   const routeNavigator = useRouteNavigator();
-
+  // const mockData = [
+  //   {
+  //     imgSrc: 'https://i.postimg.cc/TKYQMmM5/Vector-5.png',
+  //     title: 'Beautiful Mountain 1',
+  //   },
+  //   {
+  //     imgSrc: 'https://i.postimg.cc/ZCLjMHgh/Vector-4.png',
+  //     title: 'Beautiful Mountain 2',
+  //   },
+  //   {
+  //     imgSrc: 'https://i.postimg.cc/rzxfSMNs/Star-1.png',
+  //     title: 'Beautiful Mountain 3',
+  //   },
+  //   {
+  //     imgSrc: 'https://i.postimg.cc/w7z02ZwV/Vector-3.png',
+  //     title: 'Beautiful Mountain 4',
+  //   }
+  // ];
+  const mockData = [
+    {
+      id: '1',
+      imgSrc: 'https://i.postimg.cc/TKYQMmM5/Vector-5.png',
+      title: 'Beautiful Mountain 1',
+      description: 'This is a beautiful mountain located in the heart of the Alps.',
+    },
+    {
+      id: '2',
+      imgSrc: 'https://i.postimg.cc/ZCLjMHgh/Vector-4.png',
+      title: 'Beautiful Mountain 2',
+      description: 'This mountain offers breathtaking views and amazing hiking trails.',
+    },
+    {
+      id: '3',
+      imgSrc: 'https://i.postimg.cc/rzxfSMNs/Star-1.png',
+      title: 'Beautiful Mountain 1',
+      description: 'This is a beautiful mountain located in the heart of the Alps.',
+    },
+    {
+      id: '4',
+      imgSrc: 'https://i.postimg.cc/w7z02ZwV/Vector-3.png',
+      title: 'Beautiful Mountain 2',
+      description: 'This mountain offers breathtaking views and amazing hiking trails.',
+    },
+  ];
+  const handleStoryClick = (story: { id: string; title: string; description: string; imgSrc: string }) => {
+    routeNavigator.push(`/story-detail/${story.id}/${encodeURIComponent(story.title)}/${encodeURIComponent(story.description)}/${encodeURIComponent(story.imgSrc)}`);
+  };     
   return (
     <Panel id={id}>
       <PanelHeader>
@@ -37,53 +83,15 @@ export const MainScreen: FC<MainScreenProps> = ({ id, fetchedUser }) => {
           <div style={{ display: "flex", alignItems: "center" }}>BE ITMO</div>
         </PanelHeaderContent>
       </PanelHeader>
+      <Group mode="card" header={<Header mode="secondary">НОВСТИ</Header>} padding='s' style={{ paddingTop: "2vh" }}>
       <Div>
-        <CardScroll size="s" style={{ paddingTop: "2vh" }}>
-          <Card mode="tint" style={{ width: 140 }}>
-              <Div>
-                  <img 
-                      src="https://i.postimg.cc/TKYQMmM5/Vector-5.png" 
-                      alt="Beautiful Mountain" 
-                      style={{ width: 'auto', height: '110px', objectFit: 'cover' }} 
-                  />
-                  <Text>Beautiful Mountain</Text>
-              </Div>
-          </Card>
-
-          <Card mode="outline" style={{ width: 140 }}>
-              <Div>
-                  <img 
-                      src="https://i.postimg.cc/ZCLjMHgh/Vector-4.png" 
-                      alt="Beautiful Mountain" 
-                      style={{ width: 'auto', height: '110px', objectFit: 'cover' }} 
-                  />
-                  <Text>Beautiful Mountain</Text>
-              </Div>
-          </Card>
-
-          <Card mode="shadow" style={{ width: 140 }}>
-              <Div>
-                  <img 
-                      src="https://i.postimg.cc/rzxfSMNs/Star-1.png" 
-                      alt="Beautiful Mountain" 
-                      style={{ width: 'auto', height: '110px', objectFit: 'cover' }} 
-                  />
-                  <Text>Beautiful Mountain</Text>
-              </Div>
-          </Card>
-
-          <Card mode="outline-tint" style={{ width: 140 }}>
-              <Div>
-                  <img 
-                      src="https://i.postimg.cc/w7z02ZwV/Vector-3.png" 
-                      alt="Beautiful Mountain" 
-                      style={{ width: 'auto', height: '110px', objectFit: 'cover' }} 
-                  />
-                  <Text>Beautiful Mountain</Text>
-              </Div>
-          </Card>
+        <CardScroll size="s">
+          {mockData.map((item) => (
+              <CardStory key={item.id} imgSrc={item.imgSrc} title={item.title}  onClick={() => handleStoryClick(item)}/>
+          ))}
         </CardScroll>
-      </Div>
+        </Div>
+      </Group>
       <Group mode="card" header={<Header mode="secondary">QUIZ</Header>} padding='s'>
       <CardGrid size="m" style={{ paddingTop: '2vh'}}>
         <Card onClick={() => routeNavigator.push("eco-itmo")}>
