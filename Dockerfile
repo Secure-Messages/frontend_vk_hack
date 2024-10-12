@@ -1,13 +1,17 @@
 FROM node:22-alpine
 
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
+WORKDIR /app
 
 EXPOSE 3000
 
-CMD ["node", "app.js"]
+RUN apk add --no-cache yarn
+
+COPY package.json  ./
+
+RUN yarn install --frozen-lockfile && yarn cache clean --force
+
+COPY . .
+
+RUN yarn build
+
+CMD ["yarn", "start"]

@@ -62,3 +62,21 @@ jobs:
 
       - name: Log out from Docker Hub
         run: docker logout
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'v1.25.0'
+
+      - name: Create Kubernetes config directory
+        run: mkdir -p $HOME/.kube
+
+      - name: Update kubeconfig
+        run: |
+          echo "${KUBE_CONFIG_DATA}" | base64 --decode > "${HOME}/.kube/config"
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+
+      - name: Rollout restart deployment
+        run: |
+          kubectl rollout restart deployment/frontend-vk-hack -n vk-hackathon-ns

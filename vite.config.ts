@@ -33,13 +33,16 @@ export default defineConfig({
   ],
 
   server: {
-    port: 5173,
-    host: 'localhost',
-    hmr: {
-      protocol: 'ws',
-      host: 'localhost',
-    },
+  port: 8000,
+  host: '0.0.0.0',
+  hmr: {
+    protocol: 'ws',
+    host: '0.0.0.0',
+    port: 8000,
+    clientPort: 80
   },
+},
+
 
   build: {
     outDir: 'build',
