@@ -9,6 +9,10 @@ import {
   Div,
   Avatar,
   NavIdProps,
+  CardGrid,
+  Card,
+  CardScroll,
+  ContentCard,
 } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
@@ -31,11 +35,34 @@ export const Home: FC<HomeProps> = ({ id, fetchedUser }) => {
           </Cell>
         </Group>
       )}
-
+      <CardGrid size="m" style={{ marginTop: '20px' }}>
+        <Card>
+          <CardScroll size="m">
+            {/* <Card>
+              <ContentCard>
+                <img src="https://via.placeholder.com/150" alt="placeholder" style={{ width: '100%', height: '100px' }} />
+              </ContentCard>
+            </Card>
+            <Card>
+              <ContentCard>
+                <img src="https://via.placeholder.com/150" alt="placeholder" style={{ width: '100%', height: '100px' }} />
+              </ContentCard>
+            </Card> */}
+              <ContentCard>
+                <img src="https://via.placeholder.com/150" alt="placeholder" style={{ width: '100%', height: '100px' }} />
+              </ContentCard>
+          </CardScroll>
+        </Card>
+      </CardGrid>
       <Group header={<Header mode="secondary">Navigation Example</Header>}>
         <Div>
           <Button stretched size="l" mode="secondary" onClick={() => routeNavigator.push('persik')}>
             Покажите Персика, пожалуйста!
+          </Button>
+        </Div>
+        <Div>
+          <Button stretched size="l" mode="secondary" onClick={() => routeNavigator.push('main')}>
+            MAIn, пожалуйста!
           </Button>
         </Div>
       </Group>

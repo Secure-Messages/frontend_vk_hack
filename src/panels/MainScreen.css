@@ -1,0 +1,65 @@
+/* Мерцание карты (пульсирующий эффект тени) */
+@keyframes pulse {
+    0% {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .custom-card {
+    border-radius: 12px;
+    animation: pulse 2s infinite; /* Анимация тени */
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    height: 70px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .custom-card-be-track {
+    border: 1px solid;
+    border-radius:5%;
+    display: flex; /* Устанавливаем контейнер как flex-контейнер */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали (если нужно) */
+  }
+  .custom-card-be-track.eco {
+    border-color: #00a255;
+  }
+  .custom-card-be-track.pro {
+    border-color: #8373b3;
+  }
+  .custom-card-be-track.fit {
+    border-color: #008dcf;
+  }
+  .custom-card-be-track.healthy {
+    border-color: #e83757;
+  }
+  .text-be-track-card{
+    font-size: 110%;
+    font-weight: bold;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .custom-card:hover {
+    transform: scale(1.05); /* Увеличение при наведении */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Остановка мерцания и добавление тени */
+    animation: none; /* Остановка анимации при наведении */
+  }
+  
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
