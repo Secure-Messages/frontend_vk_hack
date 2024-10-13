@@ -9,7 +9,7 @@ interface CardStoryProps {
 
 const CardStory: React.FC<CardStoryProps> = ({ imgSrc, title, onClick }) => {
   return (
-    <Card mode="outline-tint" style={{ width: 140 }} onClick={onClick}>
+    <Card mode="outline-tint" style={{ width: 140 }} className='custom-card-be-track story' onClick={onClick}>
       <Div>
         <img 
           src={imgSrc} 

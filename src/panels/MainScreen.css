@@ -40,6 +40,10 @@
   .custom-card-be-track.healthy {
     border-color: #e83757;
   }
+  .custom-card-be-track.story {
+    border-color: #5432fded;
+  }
+  
   .text-be-track-card{
     font-size: 110%;
     font-weight: bold;
@@ -53,13 +57,5 @@
     transform: scale(1.05); /* Увеличение при наведении */
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Остановка мерцания и добавление тени */
     animation: none; /* Остановка анимации при наведении */
-  }
-  
-  
-  .button-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
   }
   

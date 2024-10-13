@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Panel, PanelHeader, NavIdProps, Group, ButtonGroup, Button, PanelHeaderBack, PanelSpinner, Card, Div, Text } from '@vkontakte/vkui';
+import { Panel, PanelHeader, NavIdProps, Group, ButtonGroup, Button, PanelHeaderBack, PanelSpinner, Card, Div, Text,Touch } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -15,6 +15,7 @@ interface ProItem {
 export const ProScreen: FC<ProScreenProps> = ({ id }) => {
     const [proItems, setProItems] = useState<ProItem[]>([]);
     const routeNavigator = useRouteNavigator();
+    const [swipeStart, setSwipeStart] = useState<number | null>(null);
 
     useEffect(() => {
         fetch('https://vk-back.sm2.fun/api/v1/be_itmo/get_all', {
@@ -37,9 +38,20 @@ export const ProScreen: FC<ProScreenProps> = ({ id }) => {
         })
         .catch(error => console.error("Error fetching pro items", error));
     }, []);    
-    
+    // Обрабатываем начало свайпа
+    const handleSwipeStart = (e: { startX: number }) => {
+        setSwipeStart(e.startX); // Сохраняем начальную позицию свайпа
+    };
+
+    // Обрабатываем движение свайпа
+    const handleSwipeMove = (e: { shiftX: number }) => {
+        if (swipeStart !== null && e.shiftX > 100) { // Если свайп вправо больше 100px
+            routeNavigator.back(); // Переход назад
+        }
+    };
     return (
         <Panel id={id} aria-busy={proItems.length === 0}>
+            <Touch onStartX={handleSwipeStart} onMoveX={handleSwipeMove}>
             <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.back()} />} style={{ paddingBottom: "2vh" }}>
                 ITMO PRO
             </PanelHeader>
@@ -66,16 +78,6 @@ export const ProScreen: FC<ProScreenProps> = ({ id }) => {
                         </Div>
                     </Card>
                     </Div>
-                    /* <ContentCard
-                        key={item.id}
-                        src="https://images.unsplash.com/photo-1603928726698-a015a1015d0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
-                        alt={item.name}
-                        subtitle="ITMO FIT"
-                        header={item.name}
-                        text={item.description}
-                        caption="Photo by Alexander Jawfox on Unsplash"
-                        maxHeight={500}
-                    /> */
                 ))
             ) : (
                 <Group
@@ -90,33 +92,32 @@ export const ProScreen: FC<ProScreenProps> = ({ id }) => {
                 </Group>
             )}
 
-            <Group
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "10vh",
-                }}
-            >
-                <div className="button-group">
-                    <ButtonGroup
-                        mode="horizontal"
+            <ButtonGroup
+                        mode="vertical"
                         gap="s"
                         stretched
-                        style={{ paddingBottom: '1vh' }}
+                        
                     >
                         <Button
-                            size="m"
+                            size="l"
                             appearance="accent-invariable"
                             stretched
-                            className="custom-card"
-                            onClick={() => routeNavigator.push("/persik")}
+                            
+                            align='center'
+                            onClick={() => routeNavigator.push("/rank")}
                         >
                             Рейтинг
                         </Button>
-                    </ButtonGroup>
-                </div>
-            </Group>
+                        <Button
+                            size="l"
+                            appearance="accent-invariable"
+                            stretched
+                            onClick={() => routeNavigator.push("/rank")}
+                        >
+                            Рейтинг
+                        </Button>
+            </ButtonGroup>
+            </Touch>
         </Panel>
     );
 }

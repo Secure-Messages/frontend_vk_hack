@@ -56,7 +56,7 @@ export const Home: FC<HomeProps> = ({ id, fetchedUser }) => {
       </CardGrid>
       <Group header={<Header mode="secondary">Navigation Example</Header>}>
         <Div>
-          <Button stretched size="l" mode="secondary" onClick={() => routeNavigator.push('persik')}>
+          <Button stretched size="l" mode="secondary" onClick={() => routeNavigator.push('rank')}>
             Покажите Персика, пожалуйста!
           </Button>
         </Div>

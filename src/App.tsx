@@ -3,7 +3,7 @@ import bridge, { UserInfo } from '@vkontakte/vk-bridge';
 import { View, SplitLayout, SplitCol, ScreenSpinner } from '@vkontakte/vkui';
 import { useActiveVkuiLocation } from '@vkontakte/vk-mini-apps-router';
 
-import { Persik, Home, MainScreen, EcoScreen, FitScreen, ProScreen, HealthScreen, StoryDetailScreen } from './panels';
+import { Home, MainScreen, EcoScreen, FitScreen, ProScreen, HealthScreen, StoryDetailScreen, Rank, EcoPhotoScreen } from './panels';
 import { DEFAULT_VIEW_PANELS } from './routes';
 import useOnboardSlides from './hooks/useOnboardSlides';
 
@@ -26,13 +26,14 @@ export const App = () => {
       <SplitCol>
         <View activePanel={activePanel}>
           <Home id="home" fetchedUser={fetchedUser} />
-          <Persik id="persik" />
+          <Rank id="rank" />
           <MainScreen id="main" fetchedUser={fetchedUser} />
           <EcoScreen id="eco-itmo" fetchedUser={fetchedUser} />
           <FitScreen id="fit-itmo" fetchedUser={fetchedUser} />
           <ProScreen id="pro-itmo" fetchedUser={fetchedUser} />
           <HealthScreen id="healthy-itmo" fetchedUser={fetchedUser} />
           <StoryDetailScreen id="story-detail" />
+          <EcoPhotoScreen id="echo-photo" fetchedUser={fetchedUser}/>
         </View>
       </SplitCol>
     </SplitLayout>

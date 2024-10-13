@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Panel, PanelHeader, PanelHeaderBack, Group, Div, Text, Card, Button } from '@vkontakte/vkui';
+import { FC, useState } from 'react';
+import { Panel, PanelHeader, PanelHeaderBack, Group, Div, Text, Card, Button, Touch } from '@vkontakte/vkui';
 import { useRouteNavigator, useParams } from '@vkontakte/vk-mini-apps-router';
 
 interface StoryDetailScreenProps {
@@ -8,7 +8,7 @@ interface StoryDetailScreenProps {
 
 export const StoryDetailScreen: FC<StoryDetailScreenProps> = ({ id }) => {
   const routeNavigator = useRouteNavigator();
-
+  const [swipeStart, setSwipeStart] = useState<number | null>(null);
   // Извлекаем параметры из URL, включая imgSrc
   const params = useParams<'id' | 'title' | 'description' | 'imgSrc'>();
 
@@ -23,9 +23,20 @@ export const StoryDetailScreen: FC<StoryDetailScreenProps> = ({ id }) => {
   if (!params?.id || !title || !description || !imgSrc) {
     return <Div>Ошибка: данные истории не найдены</Div>;
   }
+    // Обрабатываем начало свайпа
+    const handleSwipeStart = (e: { startX: number }) => {
+        setSwipeStart(e.startX); // Сохраняем начальную позицию свайпа
+    };
 
+    // Обрабатываем движение свайпа
+    const handleSwipeMove = (e: { shiftX: number }) => {
+        if (swipeStart !== null && e.shiftX > 100) { // Если свайп вправо больше 100px
+            routeNavigator.back(); // Переход назад
+        }
+    };
   return (
     <Panel id={id}>
+    <Touch onStartX={handleSwipeStart} onMoveX={handleSwipeMove}>
       <PanelHeader before={<PanelHeaderBack onClick={() => routeNavigator.back()} />}>
         {title}
       </PanelHeader>
@@ -68,11 +79,12 @@ export const StoryDetailScreen: FC<StoryDetailScreenProps> = ({ id }) => {
           size="m"
           appearance="accent-invariable"
           stretched
-          onClick={() => routeNavigator.back()} // Кнопка для возврата
+          onClick={() => routeNavigator.back()}
         >
           Назад
         </Button>
       </Group>
+      </Touch>
     </Panel>
   );
 };

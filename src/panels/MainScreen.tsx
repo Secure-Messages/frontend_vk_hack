@@ -25,24 +25,6 @@ export interface MainScreenProps extends NavIdProps {
 
 export const MainScreen: FC<MainScreenProps> = ({ id, fetchedUser }) => {
   const routeNavigator = useRouteNavigator();
-  // const mockData = [
-  //   {
-  //     imgSrc: 'https://i.postimg.cc/TKYQMmM5/Vector-5.png',
-  //     title: 'Beautiful Mountain 1',
-  //   },
-  //   {
-  //     imgSrc: 'https://i.postimg.cc/ZCLjMHgh/Vector-4.png',
-  //     title: 'Beautiful Mountain 2',
-  //   },
-  //   {
-  //     imgSrc: 'https://i.postimg.cc/rzxfSMNs/Star-1.png',
-  //     title: 'Beautiful Mountain 3',
-  //   },
-  //   {
-  //     imgSrc: 'https://i.postimg.cc/w7z02ZwV/Vector-3.png',
-  //     title: 'Beautiful Mountain 4',
-  //   }
-  // ];
   const mockData = [
     {
       id: '1',
@@ -138,33 +120,22 @@ export const MainScreen: FC<MainScreenProps> = ({ id, fetchedUser }) => {
         </Card>
       </CardGrid>
       </Group>
-      <Group
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "10vh",
-        }}
-      >
-        <div className="button-group">
+
           <ButtonGroup
             mode="horizontal"
             gap="s"
             stretched
-            style={{ paddingBottom: '1vh' }}
           >
             <Button
               size="m"
               appearance="accent-invariable"
               stretched
-              className="custom-card"
-              onClick={() => routeNavigator.push("persik")}
+              style={{height: '50px'}}
+              onClick={() => routeNavigator.push("rank")}
             >
               Рейтинг
             </Button>
           </ButtonGroup>
-        </div>
-      </Group>
     </Panel>
   );
 };

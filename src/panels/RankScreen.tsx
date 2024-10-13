@@ -3,7 +3,7 @@ import { NavIdProps, Panel, PanelHeader, PanelHeaderBack, Placeholder, Touch } f
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 import PersikImage from '../assets/persik.png';
 
-export const Persik: FC<NavIdProps> = ({ id }) => {
+export const Rank: FC<NavIdProps> = ({ id }) => {
   const routeNavigator = useRouteNavigator();
   const [swipeStart, setSwipeStart] = useState<number | null>(null);
 
