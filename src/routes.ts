@@ -19,7 +19,9 @@ export const DEFAULT_VIEW_PANELS = {
   FIT: 'fit-itmo',
   HEALTHY: 'healthy-itmo',
   STORY_DETAIL: 'story-detail',
-  ECO_PHOTO: 'echo-photo'
+  ECO_PHOTO: 'echo-photo',
+  MAP: 'map',
+  STORE: 'store'
 } as const;
 
 export const routes = RoutesConfig.create([
@@ -33,6 +35,8 @@ export const routes = RoutesConfig.create([
       createPanel(DEFAULT_VIEW_PANELS.FIT, `/${DEFAULT_VIEW_PANELS.FIT}`, []),
       createPanel(DEFAULT_VIEW_PANELS.HEALTHY, `/${DEFAULT_VIEW_PANELS.HEALTHY}`, []),
       createPanel(DEFAULT_VIEW_PANELS.ECO_PHOTO, `/${DEFAULT_VIEW_PANELS.ECO_PHOTO}`, []),
+      createPanel(DEFAULT_VIEW_PANELS.MAP, `/${DEFAULT_VIEW_PANELS.MAP}`, []),
+      createPanel(DEFAULT_VIEW_PANELS.STORE, `/${DEFAULT_VIEW_PANELS.STORE}`, []),
       createPanel(DEFAULT_VIEW_PANELS.STORY_DETAIL, '/story-detail/:id/:title/:description/:imgSrc', []), // Убедитесь, что маршрут настроен для передачи параметров
     ]),
   ]),

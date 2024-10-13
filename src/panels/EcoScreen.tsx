@@ -24,7 +24,7 @@ export const EcoScreen: FC<EcoScreenProps> = ({ id }) => {
             headers: {
                 'Accept': 'application/json',
             },
-            mode: 'cors',  // Используем CORS-режим
+            mode: 'cors',
         })
         .then(response => {
             if (!response.ok) {
@@ -33,21 +33,18 @@ export const EcoScreen: FC<EcoScreenProps> = ({ id }) => {
             return response.json();
         })
         .then(data => {
-            // Фильтруем элементы с названием "be eco"
             const ecoData = data.filter((item: {name: string}) => item.name === 'be eco');
             setEcoItems(ecoData);
         })
         .catch(error => console.error("Error fetching eco items", error));
     }, []);    
-    // Обрабатываем начало свайпа
     const handleSwipeStart = (e: { startX: number }) => {
-        setSwipeStart(e.startX); // Сохраняем начальную позицию свайпа
+        setSwipeStart(e.startX);
     };
 
-    // Обрабатываем движение свайпа
     const handleSwipeMove = (e: { shiftX: number }) => {
-        if (swipeStart !== null && e.shiftX > 100) { // Если свайп вправо больше 100px
-            routeNavigator.back(); // Переход назад
+        if (swipeStart !== null && e.shiftX > 100) { 
+            routeNavigator.back(); 
         }
     };
     return (
@@ -76,7 +73,7 @@ export const EcoScreen: FC<EcoScreenProps> = ({ id }) => {
                                 }}
                             />
                             <Text style={{ marginTop: '8px', textAlign: 'center' }}>{item.name}</Text>
-                            <Text style={{ marginTop: '4px', color: 'gray', textAlign: 'center', width: '80%' }}>{item.description}</Text>
+                            <div style={{ marginTop: '4px', fontSize: '14px', color: 'gray', textAlign: 'center', width: '80%' }}>{item.description}</div>
                         </Div>
                     </Card>
                     </Div>
@@ -98,11 +95,11 @@ export const EcoScreen: FC<EcoScreenProps> = ({ id }) => {
                 <ContentCard
                 disabled
                 mode="outline-tint"
-                alt="Picture of person's left hand with pink paint"
+                alt="Сортировка - основа!"
                 subtitle="unsplash"
-                header="Person's left hand with pink paint"
-                text="Five hours of makeup and paint to achieve the human anatomy photoshoot. Thank you Steph and Shay. See more and official credit on @jawfox.photography."
-                caption="Photo by Alexander Jawfox on Unsplash"
+                header="Сортировка - основа!"
+                text="Приложите как правильно сортировать свои отходы, мы вам за это начислем баллы)"
+                caption="Все участники имеет доступ для модерирование с количесвенным ограничением"
                 maxHeight={500}
                 />
                 <ButtonGroup
@@ -117,7 +114,7 @@ export const EcoScreen: FC<EcoScreenProps> = ({ id }) => {
                         stretched
                         
                         align='center'
-                        onClick={() => routeNavigator.push("/rank")}
+                        onClick={() => window.location.href = 'https://example.com'}
                     >
                         Прочитать
                     </Button>

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Panel, PanelHeader, NavIdProps, Group, ButtonGroup, Button, PanelHeaderBack, PanelSpinner, Card, Div, Text, Touch } from '@vkontakte/vkui';
+import { Panel, PanelHeader, NavIdProps, Group, PanelHeaderBack, PanelSpinner, Card, Div, Text, Touch } from '@vkontakte/vkui';
 import { UserInfo } from '@vkontakte/vk-bridge';
 import { useRouteNavigator } from '@vkontakte/vk-mini-apps-router';
 
@@ -90,32 +90,6 @@ export const FitScreen: FC<FitScreenProps> = ({ id }) => {
                     <PanelSpinner size="large" height={100} disableAnimation={true}>BE FIT || ITMO BE</PanelSpinner>
                 </Group>
             )}
-
-                <ButtonGroup
-                        mode="vertical"
-                        gap="s"
-                        stretched
-                        
-                    >
-                        <Button
-                            size="l"
-                            appearance="accent-invariable"
-                            stretched
-                            
-                            align='center'
-                            onClick={() => routeNavigator.push("/rank")}
-                        >
-                            Рейтинг
-                        </Button>
-                        <Button
-                            size="l"
-                            appearance="accent-invariable"
-                            stretched
-                            onClick={() => routeNavigator.push("/rank")}
-                        >
-                            Рейтинг
-                        </Button>
-                    </ButtonGroup>
             </Touch>
         </Panel>
     );

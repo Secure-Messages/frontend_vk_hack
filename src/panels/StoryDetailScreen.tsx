@@ -47,7 +47,7 @@ export const StoryDetailScreen: FC<StoryDetailScreenProps> = ({ id }) => {
             <Div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               {/* Отображение изображения истории */}
               <img 
-                src={imgSrc} 
+                src={`https://vk-back.sm2.fun/api/v1/be_itmo/stories_photo/${imgSrc}`} 
                 alt={title} 
                 style={{ 
                   width: 'auto', 
@@ -61,12 +61,12 @@ export const StoryDetailScreen: FC<StoryDetailScreenProps> = ({ id }) => {
               {/* Название истории */}
               <Text style={{ marginTop: '8px', textAlign: 'center' }}>{title}</Text>
               {/* Описание истории */}
-              <Text style={{ marginTop: '4px', color: 'gray', textAlign: 'center', width: '80%' }}>{description}</Text>
+              <div style={{ fontSize: '14px', marginTop: '4px', color: 'gray', textAlign: 'center', width: '80%' }}>{description}</div>
             </Div>
           </Card>
         </Div>
       </Group>
-
+    <Div>
       <Group
         style={{
           display: "flex",
@@ -84,6 +84,7 @@ export const StoryDetailScreen: FC<StoryDetailScreenProps> = ({ id }) => {
           Назад
         </Button>
       </Group>
+      </Div>
       </Touch>
     </Panel>
   );
