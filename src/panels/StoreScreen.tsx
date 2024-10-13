@@ -37,7 +37,7 @@ export const StoreScreen: FC<NavIdProps> = ({ id }) => {
           <Spinner size="large" />
         </Div>
       ) : (
-        <Div style={{ marginLeft:'5%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '10px' }}>
+        <Div style={{ marginLeft:'5%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 0.5fr))', gap: '5px' }}>
           {items.map((item) => (
             <StoreItemCard
               key={item.id}

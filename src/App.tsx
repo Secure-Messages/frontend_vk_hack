@@ -65,7 +65,7 @@ export const App = () => {
         >
           <View id="main" activePanel={activePanel}>
             <Home id="home" fetchedUser={fetchedUser} />
-            <Rank id="rank" />
+            <Rank id="rank" fetchedUser={fetchedUser}/>
             <MainScreen id="main" fetchedUser={fetchedUser} />
             <EcoScreen id="eco-itmo" fetchedUser={fetchedUser} />
             <FitScreen id="fit-itmo" fetchedUser={fetchedUser} />
